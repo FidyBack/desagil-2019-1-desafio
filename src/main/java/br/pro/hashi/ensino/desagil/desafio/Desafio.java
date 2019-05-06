@@ -19,9 +19,16 @@ public class Desafio {
             // Adiciona a visão à janela.
             frame.setContentPane(view);
 
-            // Adiciona o controlador à lista de observadores
-            // das ações de teclado detectadas pela janela.
             frame.addKeyListener(controller);
+            Timer timer = new Timer(100, controller);
+            timer.start();
+
+            if (model.getHumanPlayer().getRow() == model.getTarget().getRow() && model.getHumanPlayer().getCol() == model.getTarget().getCol()) {
+                model.setWinner(model.getHumanPlayer());
+                System.out.println(model.getWinner());
+            } else if (model.getCpuPlayer().getRow() == model.getTarget().getRow() && model.getCpuPlayer().getCol() == model.getTarget().getCol()) {
+                model.setWinner(model.getCpuPlayer());
+            }
 
             // Configura a janela para encerrar o programa quando for fechada.
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -35,12 +42,6 @@ public class Desafio {
             // Exibe a janela.
             frame.setVisible(true);
 
-            // Constrói um relógio de 100 milissegundos e adiciona
-            // o controlador à lista de observadores desse relógio.
-            Timer timer = new Timer(100, controller);
-
-            // Inicia o relógio.
-            timer.start();
         });
     }
 }
